@@ -8,11 +8,17 @@ import Link from "next/link";
 const name = "Spas Z. Spasov";
 export const siteTitle = "Next.js Sample Website";
 
+interface Props {
+  children: React.ReactNode; // JSX.Element | JSX.Element[]; // Also works
+  home?: boolean;
+  title?: string;
+}
+
 export default function Layout({
   children,
   home,
   title = "Create Next.js App",
-}) {
+}: Props) {
   return (
     <div className={styles.container}>
       <Head>
