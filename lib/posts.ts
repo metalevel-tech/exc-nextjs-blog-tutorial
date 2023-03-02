@@ -23,6 +23,11 @@ import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
+interface MatterDataPosts {
+  title: string;
+  date: string;
+}
+
 export function getStoredPostsData() {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory);
@@ -36,12 +41,13 @@ export function getStoredPostsData() {
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
     // Use gray-matter to parse the post's metadata section
+    //
     const matterResult = matter(fileContents);
 
     // Combine the data with the id
     return {
       id,
-      ...matterResult.data,
+      ...(matterResult.data as MatterDataPosts),
     };
   });
 
